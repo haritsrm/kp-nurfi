@@ -62,6 +62,18 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            
+            a:link{
+                text-decoration: none;
+                font-family: serif;
+                font-size: 110%;
+            }
+            a:visited {
+                color: black;
+            }
+            a:hover {
+                color : #86b300;
+            }
         </style>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -72,16 +84,29 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
+            
+    <!--wrapper-->
+    <div class="wrapper">
+		<header>
+			<!--logo-->
+			<div class="logo">		
+			</div>
+			<!--end logo-->
+			<!--judul-->
+			<div class="judul">
+				<center style="color: black;font-family: sans-serif;font-size: 160%;font-weight: bold;">Peminjaman Inventori Barang dan Ruangan</center>
+			</div>
+			<!--end judul-->
+				<!--menu login-->
+                @if (Route::has('login'))
+                    <div class="menu_login">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="#" data-toggle="modal" data-target="#loginModal">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
                         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -140,32 +165,71 @@
                                                 </button>
 
                                                 <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                    {{ __('Forgot Your Password?') }}
+                                                    {{ __('Lupa kata sandi?') }}
                                                 </a>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
+                                <div class="modal-footer">
+                                    Belum punya akun? <a href="{{ route('register') }}">Klik disini!</a>
+                                </div>
                                 </div>
                             </div>
                             </div>
+                            @if ($errors->has('email') or $errors->has('password'))
+                            <div class="alert alert-danger mt-3" role="alert">
+                                <strong>{{ $errors->first('email') }}</strong>
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </div>
+                            @endif
                     @endauth
                 </div>
             @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
+			<!--end menu login-->
+			<!--menu barang-->
+			<div class="menu_barang">
+				<a href="">Daftar Barang</a>
+			</div>
+			<!--end menu barang-->
+				</header>
+		<!--konten-->
+		<div class="konten">
+			<aside>
+				<center><h3>Peminjaman</h3></center>
+                <h4>Tanggal Peminjaman :</h4>
+                <input type="date" class="form-control">
+                <h4>Tanggal Pengembalian :</h4>
+                <input type="date" class="form-control">
+                <center><input type="submit" value="Cek Barang" class="btn btn-success m-2"></center>
+			</aside>
+			<!--menu utama-->
+			<div id="utama">
+			
+			</div>
+			<!--end menu utama-->	
+		</div>
+		<!--end konten-->
+		<!--footer-->
+		<footer class="footer" style="background-color: #20272d; border-top: 4px solid #86b300; margin-top: 20px;">
+			<!--container-->
+			<div class="container">
+				<!--row-->
+				<div class="row">
+					<div class="col-md-6">PTIPD1</div>
+					<div class="col-md-6">PTIPD2</div>
+				</div>
+				<!--end row-->
+				<!--row-->
+				<div class="row">
+					<div class="col-md-12">PTIPD3</div>
+				</div>
+				<!--end row-->
+			</div>
+			<!--end container-->
+		</footer>
+		<!--end footer-->
+	</div>
+	<!--end wrapper-->
     </body>
 </html>
